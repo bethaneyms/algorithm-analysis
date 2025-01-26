@@ -1,0 +1,45 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+    public class NotFibonacciPos {
+
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+
+
+            System.out.print("Enter a number to find its position in the NotFibonacci sequence: ");
+            BigInteger target = scanner.nextBigInteger();
+
+
+            int position = findPositionInNotFibonacci(target);
+            System.out.println("Output: " + position);
+        }
+
+        public static int findPositionInNotFibonacci(BigInteger target) {
+
+            BigInteger prev2 = BigInteger.ZERO; // First term
+            BigInteger prev1 = BigInteger.ONE;  // Second term
+
+            if (target.equals(prev2)) return 1; // Position of 0
+            if (target.equals(prev1)) return 2; // Position of 1
+
+
+            int position = 2;
+            while (true) {
+                BigInteger current = prev1.multiply(BigInteger.valueOf(3)).add(prev2.multiply(BigInteger.valueOf(2)));
+                position++;
+
+                if (current.equals(target)) {
+                    return position;
+                } else if (current.compareTo(target) > 0) {
+                    return position - 1;
+                }
+
+
+                prev2 = prev1;
+                prev1 = current;
+            }
+        }
+    }
+
+
