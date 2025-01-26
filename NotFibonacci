@@ -1,0 +1,37 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class NotFibonacci {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt user for the number of terms
+        System.out.print("Enter the number of terms in the NotFibonacci sequence: ");
+        int terms = scanner.nextInt();
+
+        // Generate and display the sequence
+        generateNotFibonacci(terms);
+    }
+
+    public static void generateNotFibonacci(int terms) {
+        // Use BigInteger to handle large numbers
+        BigInteger prev2 = BigInteger.ZERO; // First term
+        BigInteger prev1 = BigInteger.ONE;  // Second term
+
+        System.out.println("NotFibonacci Sequence:");
+        if (terms >= 1) System.out.print(prev2 + " "); // Print first term
+        if (terms >= 2) System.out.print(prev1 + " "); // Print second term
+
+        for (int i = 3; i <= terms; i++) {
+            // Correct formula to calculate the next term
+            BigInteger current = prev1.multiply(BigInteger.valueOf(3)).add(prev2.multiply(BigInteger.valueOf(2)));
+            System.out.print(current + " "); // Print the current term
+
+            // Update the previous two terms for the next iteration
+            prev2 = prev1;
+            prev1 = current;
+        }
+        System.out.println(); // Print a new line at the end
+    }
+}
